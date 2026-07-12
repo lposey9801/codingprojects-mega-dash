@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://buog12qgv6l5s"]
+
+[ext_resource type="Script" uid="uid://drvc4uj3q4npw" path="res://Scripts/Characters/player.gd" id="1_0el0d"]
+[ext_resource type="Texture2D" uid="uid://besx1gddw0bj8" path="res://Assets/Sprites/Layla8Bit.png" id="2_0el0d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nei21"]
+size = Vector2(32, 64)
+
+[node name="Player" type="CharacterBody2D" unique_id=560584857]
+script = ExtResource("1_0el0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=475376348]
+shape = SubResource("RectangleShape2D_nei21")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329997837]
+position = Vector2(14, 32)
+scale = Vector2(0.31, 0.31)
+texture = ExtResource("2_0el0d")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=442632416]

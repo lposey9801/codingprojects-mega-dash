@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://fwp2bwpkg1fv"]
+
+[ext_resource type="PackedScene" uid="uid://buog12qgv6l5s" path="res://Scenes/Characters/Player.tscn" id="1_ss4xl"]
+[ext_resource type="Texture2D" uid="uid://cdo0db3qh2fai" path="res://Assets/Tiles/Brick-Pattern--Arvin61r58.svg" id="2_ytf4i"]
+[ext_resource type="Script" uid="uid://dxk4dso3i70ti" path="res://Scripts/Game/deathBox.gd" id="3_7e5cw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nei21"]
+size = Vector2(2156, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rqbix"]
+size = Vector2(45, 584)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gumq"]
+size = Vector2(7656, 315)
+
+[node name="Level1" type="Node2D" unique_id=916019670]
+
+[node name="Player" parent="." unique_id=560584857 instance=ExtResource("1_ss4xl")]
+position = Vector2(0, -52)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1072726996]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=599677114]
+position = Vector2(-922, 0)
+shape = SubResource("RectangleShape2D_nei21")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=235159980]
+position = Vector2(-922.0001, 63.420002)
+scale = Vector2(10.88889, 0.870625)
+texture = ExtResource("2_ytf4i")
+
+[node name="wall1" type="StaticBody2D" parent="." unique_id=6372935]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall1" unique_id=436983128]
+position = Vector2(-570.5, -312)
+shape = SubResource("RectangleShape2D_rqbix")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall1" unique_id=687653861]
+position = Vector2(-570.5, -312)
+scale = Vector2(0.22727257, 3.0416663)
+texture = ExtResource("2_ytf4i")
+
+[node name="wall2" type="StaticBody2D" parent="." unique_id=1118880355]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall2" unique_id=2107902249]
+position = Vector2(-428, -310)
+shape = SubResource("RectangleShape2D_rqbix")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall2" unique_id=1214826861]
+position = Vector2(-428, -311)
+scale = Vector2(0.22727257, 3.0416663)
+texture = ExtResource("2_ytf4i")
+
+[node name="respawnMarker" type="Marker2D" parent="." unique_id=1978607902]
+position = Vector2(-207, -171)
+
+[node name="DeathZone" type="Area2D" parent="." unique_id=1902742807]
+script = ExtResource("3_7e5cw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=351988445]
+position = Vector2(-9, 352.5)
+shape = SubResource("RectangleShape2D_5gumq")
