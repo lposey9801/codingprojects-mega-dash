@@ -1,4 +1,5 @@
 extends CharacterBody2D
+@onready var animated_sprite: AnimatedSprite2D = get_node_or_null("AnimatedSprite2D")
 
 # movement related constants
 const SPEED = 300.0
@@ -88,7 +89,10 @@ func _physics_process(delta) -> void:
 	
 	# this pushes all changes to screen
 	move_and_slide()
-
+	
+	 #update animation.  
+	#(This happens at end of physics function to take advantage of any velocity or collision that has been calculated)
+	update_animation()
 
 
 func update_jump_buffer(delta) -> void:
@@ -219,3 +223,32 @@ func update_wall_normal() -> void:
 			#if the x is bigger than the determinded wall slope, then use that as a vector.
 			if abs(current_collision_normal.x) > WALL_SLOPE:
 				wall_normal = current_collision_normal
+
+	 
+func update_animation() -> void:
+	# The original Player does not have an AnimatedSprite2D. Don't try to play the animation.
+	#This burned me bad for a fat minute.
+	if animated_sprite == null:
+		return
+		
+	# Get the sprites x-velocity to calculate if it needs to play walk and if so which way.
+	if velocity.x < -0.1:
+		animated_sprite.flip_h = true
+	elif velocity.x > 0.1:
+		animated_sprite.flip_h = false
+
+	# Choose the animation based on the character's current state.
+	if not is_on_floor():
+		#if already playing jump keep playing don't start again from first frame
+		if animated_sprite.animation != "jump":
+			animated_sprite.play("jump")
+	elif abs(velocity.x) > 0.1:
+		#if already playing walk keep playing don't start again from first frame
+		if animated_sprite.animation != "walk":
+			animated_sprite.play("walk")
+	else:
+		#if already playing idle keep playing don't start again from first frame
+		if animated_sprite.animation != "idle":
+			animated_sprite.play("idle")
+	
+	
