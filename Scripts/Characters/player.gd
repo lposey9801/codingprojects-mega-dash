@@ -242,7 +242,7 @@ func update_animation() -> void:
 		#if already playing jump keep playing don't start again from first frame
 		if animated_sprite.animation != "jump":
 			animated_sprite.play("jump")
-	elif abs(velocity.x) > 0.1:
+	elif abs(velocity.x) > 0.1:  #absolute for either positive or negative velocity
 		#if already playing walk keep playing don't start again from first frame
 		if animated_sprite.animation != "walk":
 			animated_sprite.play("walk")
